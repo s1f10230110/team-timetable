@@ -1,0 +1,26 @@
+.filter-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.filter-group {
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: #f9f9f9;
+}
+.filter-group label {
+    display: block;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: #f2f2f2;
+}

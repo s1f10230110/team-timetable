@@ -1,3 +1,41 @@
 h1 {
     color: blue;
 }
+
+body {
+    font-family: Arial, sans-serif;
+}
+.tabs {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+}
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    background: #f1f1f1;
+    margin-right: 5px;
+}
+.tab.active {
+    background: white;
+    border-top: 2px solid blue;
+    font-weight: bold;
+}
+.tab-content {
+    display: none;
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+.tab-content.active {
+    display: block;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}

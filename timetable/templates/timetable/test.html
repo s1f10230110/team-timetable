@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <title>timetable Application</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <meta name="author" content="INIAD">
+    <link href="{% static 'timetable/css/index.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <script>
+      const timetableJsonUrl = "{% static 'timetable/data/timetable.json' %}";
+    </script>
+
+    <h2>時間割 デバッグ用</h2>
+
+    <a href="{% url 'index' %}">top</a>
+    <br>
+    <a href="{% url 'test' %}">時間割 デバッグ用</a>
+    <br>
+    <a href="{% url 'filter' %}">時間割フィルタ デバッグ用</a>
+
+    <!-- タブ -->
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('全表示')">全表示</div>
+      <div class="tab" onclick="switchTab('コンピュータ・システム')">コンピュータ・システム</div>
+      <div class="tab" onclick="switchTab('コンピュータ・ソフトウェア')">コンピュータ・ソフトウェア</div>
+      <div class="tab" onclick="switchTab('ユーザ・エクスペリエンス')">ユーザ・エクスペリエンス</div>
+      <div class="tab" onclick="switchTab('データサイエンス')">データサイエンス</div>
+      <div class="tab" onclick="switchTab('ICT')">ICT</div>
+      <div class="tab" onclick="switchTab('ビジネス')">ビジネス</div>
+      <div class="tab" onclick="switchTab('コミュニティ')">コミュニティ</div>
+    </div>
+
+  <div id="content"></div>
+    
+    <script src="{% static 'timetable/js/test.js' %}"></script>
+  </body>
+
+</html>
