@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>時間割削除確認</title>
+</head>
+<body>
+    <h2>時間割「{{ timetable.title }}」を削除してもよろしいですか？</h2>
+    <p>※この時間割に含まれる授業もすべて削除されます。</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">削除する</button>
+        <a href="{% url 'test4' %}">キャンセル</a>
+    </form>
+</body>
+</html>

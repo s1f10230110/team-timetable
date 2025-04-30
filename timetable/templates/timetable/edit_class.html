@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>timetable Application</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <meta name="author" content="INIAD">
+        <link href="{% static 'timetable/css/index.css' %}" rel="stylesheet">
+        <script type="text/javascript" src="{% static 'timetable/js/index.js' %}"></script>
+    </head>
+  <body>
+    <h1>授業を編集する（{{ entry.subject }}）</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="subject">授業名:</label>
+        <input type="text" id="subject" name="subject" value="{{ entry.subject }}"><br>
+
+        <label for="weekday">曜日:</label>
+        <select id="weekday" name="weekday">
+            {% for code, label in entry.WEEKDAYS %}
+            <option value="{{ code }}" {% if entry.weekday == code %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="period">時限:</label>
+        <select id="period" name="period">
+            {% for code, label in entry.PERIOD_CHOICES %}
+            <option value="{{ code }}" {% if entry.period == code %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="classroom">教室:</label>
+        <input type="text" id="classroom" name="classroom" value="{{ entry.classroom }}"><br>
+
+        <label for="teacher">教員:</label>
+        <input type="text" id="teacher" name="teacher" value="{{ entry.teacher }}"><br>
+
+        <label for="note">メモ:</label>
+        <textarea id="note" name="note">{{ entry.note }}</textarea><br>
+
+        <button type="submit">保存</button>
+    </form>
+    
+    <a href="{% url 'test3' %}">時間割を作成</a>
+    <br>
+    <a href="{% url 'index' %}">top</a>
+  </body>
+</html>

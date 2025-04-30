@@ -23,6 +23,29 @@
     <a href="{% url 'test2' %}">test2</a>
     <br>
     <a href="{% url 'filter' %}">時間割フィルタ デバッグ用</a>
+    <br>
+    <hr>
+
+    <h2>↓最低限の機能完成</h2>
+    <a href="{% url 'test3' %}">時間割作成</a>
+    <br>
+    <a href="{% url 'test4' %}">時間割一覧</a>
+    
+    <p>募：ソースコードの整理(ページ間のリンク、コードの見やすさ、htmlファイル・view.py・urls.pyのわかりやすい名前の変更(これは相互関係があり、直すのが大変なので頑張ってください))、デザイン</p>
+    <p>関係あるファイル</p>
+    <ul>
+      <li>index.html：この画面</li>
+      <li>confirm_delete.html：時間割自体の削除</li>
+      <li>edit_class.html：授業の編集</li>
+      <li>test3.html：時間割作成画面</li>
+      <li>test4_detail.html：時間割の詳細画面、授業の表示</li>
+      <li>test4.html：時間割一覧画面</li>
+      <li>test31.html：授業登録画面</li>
+      <li>urls.py</li>
+      <li>views.py</li>
+    </ul>
+    
   </body>
+
 
 </html>

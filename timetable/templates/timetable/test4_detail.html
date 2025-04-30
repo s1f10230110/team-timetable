@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ timetable.title }} の時間割</title>
+</head>
+<body>
+    <h1>{{ timetable.title }} の時間割</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>曜日</th>
+                <th>時限</th>
+                <th>授業名</th>
+                <th>教室</th>
+                <th>教員</th>
+                <th>メモ</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in entries %}
+            <tr>
+                <td>{{ entry.weekday }}</td>
+                <td>{{ entry.period }}</td>
+                <td>{{ entry.subject }}</td>
+                <td>{{ entry.classroom }}</td>
+                <td>{{ entry.teacher }}</td>
+                <td>{{ entry.note }}</td>
+                <td><a href="{% url 'edit_class' entry.id %}">編集</a></td>
+                <td><a href="{% url 'delete_class' entry.id %}">削除</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">この時間割にはまだ授業が登録されていません。</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'test31' timetable.id %}">授業を追加</a>
+    <br>
+    <a href="{% url 'index' %}">top</a>
+    <br>
+    <a href="{% url 'test4' %}">一覧へ</a>
+</body>
+</html>
