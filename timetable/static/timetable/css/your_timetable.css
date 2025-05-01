@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1 {
+    margin: 10px auto;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.sample-table {
+    display: grid;
+    grid-template-columns: 100px repeat(6, 1fr); /* 1列目は時限用 */
+    gap: 2px;
+    width: 90%;
+    margin: 10px auto;
+    font-size: 16px;
+  }
+  
+  .sample-table .header-cell {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+    background-color: #bbb;
+    color: whitesmoke;
+    font-weight: bold;
+    min-height: 50px;
+  }
+  
+  .sample-table .cell {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+    background-color: #ddd;
+    min-height: 50px;
+  }
+
+
+
+  .bottom-area {
+    width: 50%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-button, .top-button {
+    display: block;
+    width: 100%;
+    border: 1px solid #333;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+    background-color: #bbb;
+    color: whitesmoke;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.add-button:hover, .top-button:hover {
+    background-color: #999;
+}

@@ -39,11 +39,18 @@ def test4(request):
     return render(request, 'timetable/test4.html', {'timetables': timetables})
 
 def test4_detail(request, timetable_id):
-    timetable = Timetable.objects.get(id=timetable_id)
-    entries = ClassEntry.objects.filter(timetable=timetable).order_by('weekday', 'period')
+    timetable = get_object_or_404(Timetable, id=timetable_id)
+    entries = ClassEntry.objects.filter(timetable=timetable)
+
+    # キーを '月1', '火2', ... のような文字列にする
+    entry_dict = {
+        f"{entry.weekday}{entry.period}": entry
+        for entry in entries
+    }
+
     return render(request, 'timetable/test4_detail.html', {
         'timetable': timetable,
-        'entries': entries,
+        'entries': entry_dict,
     })
 
 def delete_timetable(request, timetable_id):

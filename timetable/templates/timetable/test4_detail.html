@@ -1,48 +1,57 @@
+{% load static %}
+{% load custom_filters %}
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <title>{{ timetable.title }} の時間割</title>
+    <link href="{% static 'timetable/css/common.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'timetable/css/your_timetable.css' %}">
 </head>
 <body>
+    <header>
+        <ul class="menu-bar">
+            <li class="menu-item">授業の登録</li>
+            <li class="menu-item">時間割の登録</li>
+            <li class="menu-item">授業の一覧</li>
+            <li class="menu-item">時間割の一覧</li>
+        </ul>
+    </header>
     <h1>{{ timetable.title }} の時間割</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>曜日</th>
-                <th>時限</th>
-                <th>授業名</th>
-                <th>教室</th>
-                <th>教員</th>
-                <th>メモ</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for entry in entries %}
-            <tr>
-                <td>{{ entry.weekday }}</td>
-                <td>{{ entry.period }}</td>
-                <td>{{ entry.subject }}</td>
-                <td>{{ entry.classroom }}</td>
-                <td>{{ entry.teacher }}</td>
-                <td>{{ entry.note }}</td>
-                <td><a href="{% url 'edit_class' entry.id %}">編集</a></td>
-                <td><a href="{% url 'delete_class' entry.id %}">削除</a></td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="7">この時間割にはまだ授業が登録されていません。</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="sample-table">
+        <div class="header-cell"></div>
+        {% for day in "月火水木金土" %}
+          <div class="header-cell">{{ day }}</div>
+        {% endfor %}
+      
+        {% for period in "123456" %}
+          <div class="header-cell">{{ period }}限</div>
+          {% for day in "月火水木金土" %}
+            {% with key=day|add:period %}
+              {% with entry=entries|get_item:key %}
+                <div class="cell">
+                  {% if entry %}
+                    <strong>{{ entry.subject }}</strong><br>
+                    {{ entry.classroom }}<br>
+                    <a href="{% url 'edit_class' entry.id %}">編集</a> /
+                    <a href="{% url 'delete_class' entry.id %}">削除</a>
+                  {% else %}
+                     - 
+                  {% endif %}
+                </div>
+              {% endwith %}
+            {% endwith %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      
 
-    <a href="{% url 'test31' timetable.id %}">授業を追加</a>
-    <br>
-    <a href="{% url 'index' %}">top</a>
-    <br>
-    <a href="{% url 'test4' %}">一覧へ</a>
+    <div class="bottom-area">
+        <a class="add-button" href="{% url 'test31' timetable.id %}">授業を追加</a>
+        <a class="top-button" href="{% url 'index' %}">top</a>
+    </div>
+    
 </body>
 </html>
