@@ -1,0 +1,88 @@
+{% load static %}
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ timetable.title }} の時間割</title>
+    <link href="{% static 'timetable/css/common.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'timetable/css/your_timetable.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar fixed-top">
+      <div class="container-fluid justify-content-end">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">メニュー</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active text-white" href="{% url 'index' %}">Top</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'timetable_create' %}">時間割作成</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'timetable_list' %}">時間割一覧</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!--
+    <header>
+        <ul class="menu-bar">
+            <li class="menu-item">授業の登録</li>
+            <li class="menu-item">時間割の登録</li>
+            <li class="menu-item">授業の一覧</li>
+            <li class="menu-item">時間割の一覧</li>
+        </ul>
+    </header>
+    -->
+    <h1>{{ timetable.title }} の時間割</h1>
+
+    <div class="sample-table">
+        <div class="header-cell"></div>
+        {% for day in "月火水木金土" %}
+          <div class="header-cell">{{ day }}</div>
+        {% endfor %}
+      
+        {% for period in "123456" %}
+          <div class="header-cell">{{ period }}限</div>
+          {% for day in "月火水木金土" %}
+            {% with key=day|add:period %}
+              {% with entry=entries|get_item:key %}
+                <div class="cell">
+                  {% if entry %}
+                    <strong>{{ entry.subject }}</strong><br>
+                    {{ entry.classroom }}<br>
+                    <a href="{% url 'class_edit' entry.id %}">編集</a> /
+                    <a href="{% url 'delete_class' entry.id %}">削除</a>
+                  {% else %}
+                     - 
+                  {% endif %}
+                </div>
+              {% endwith %}
+            {% endwith %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      
+
+    <div class="bottom-area">
+        <a class="add-button" href="{% url 'class_register' timetable.id %}">授業を追加</a>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>    
+</body>
+</html>

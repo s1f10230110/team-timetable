@@ -11,15 +11,15 @@ def test(request):
 def test2(request):
     return render(request, 'timetable/test2.html')
 
-def test3(request):
+def timetable_create(request):
     if request.method == 'POST':
         # POSTデータを取得
         title = request.POST['title']
         timetable = Timetable.objects.create(title=title)
-        return redirect('test31', timetable_id=timetable.id)
-    return render(request, 'timetable/test3.html')
+        return redirect('class_register', timetable_id=timetable.id)
+    return render(request, 'timetable/timetable_create.html')
 
-def test31(request, timetable_id):
+def class_register(request, timetable_id):
     timetable = Timetable.objects.get(id=timetable_id)
     if request.method == 'POST':
         ClassEntry.objects.create(
@@ -31,14 +31,14 @@ def test31(request, timetable_id):
             teacher=request.POST['teacher'],
             note=request.POST['note']
         )
-        return redirect('test31', timetable_id=timetable.id)
-    return render(request, 'timetable/test31.html', {'timetable': timetable})
+        return redirect('class_register', timetable_id=timetable.id)
+    return render(request, 'timetable/class_register.html', {'timetable': timetable})
 
-def test4(request):
+def timetable_list(request):
     timetables = Timetable.objects.all()
-    return render(request, 'timetable/test4.html', {'timetables': timetables})
+    return render(request, 'timetable/timetable_list.html', {'timetables': timetables})
 
-def test4_detail(request, timetable_id):
+def timetable_detail(request, timetable_id):
     timetable = get_object_or_404(Timetable, id=timetable_id)
     entries = ClassEntry.objects.filter(timetable=timetable)
 
@@ -48,21 +48,21 @@ def test4_detail(request, timetable_id):
         for entry in entries
     }
 
-    return render(request, 'timetable/test4_detail.html', {
+    return render(request, 'timetable/timetable_detail.html', {
         'timetable': timetable,
         'entries': entry_dict,
     })
 
-def delete_timetable(request, timetable_id):
+def timetable_delete(request, timetable_id):
     timetable = get_object_or_404(Timetable, id=timetable_id)
 
     if request.method == 'POST':
         timetable.delete()
-        return redirect('test4')  # タイトル一覧へ戻る
+        return redirect('timetable_list')  # タイトル一覧へ戻る
 
-    return render(request, 'timetable/confirm_delete.html', {'timetable': timetable})
+    return render(request, 'timetable/timetable_delete.html', {'timetable': timetable})
 
-def edit_class(request, entry_id):
+def class_edit(request, entry_id):
     entry = get_object_or_404(ClassEntry, id=entry_id)
     if request.method == 'POST':
         entry.subject = request.POST['subject']
@@ -72,14 +72,14 @@ def edit_class(request, entry_id):
         entry.teacher = request.POST['teacher']
         entry.note = request.POST['note']
         entry.save()
-        return redirect('test4_detail', timetable_id=entry.timetable.id)
-    return render(request, 'timetable/edit_class.html', {'entry': entry})
+        return redirect('timetable_detail', timetable_id=entry.timetable.id)
+    return render(request, 'timetable/class_edit.html', {'entry': entry})
 
 def delete_class(request, entry_id):
     entry = get_object_or_404(ClassEntry, id=entry_id)
     timetable_id = entry.timetable.id
     entry.delete()
-    return redirect('test4_detail', timetable_id=timetable_id)
+    return redirect('timetable_detail', timetable_id=timetable_id)
 
 def filter(request):
     return render(request, 'timetable/filter.html')

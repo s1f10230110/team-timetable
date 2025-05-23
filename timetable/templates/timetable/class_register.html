@@ -17,7 +17,7 @@
     <h1>授業を追加する（{{ timetable.title }}）</h1>
     <a href="{% url 'index' %}">top</a>
 
-    <form action="{% url 'test31' timetable.id %}" method="post">
+    <form action="{% url 'class_register' timetable.id %}" method="post">
         {% csrf_token %}
 
         <div>
@@ -71,7 +71,7 @@
         </div>
     </form>
 
-    <p><a href="{% url 'test4_detail' timetable.id %}">終了する</a></p>
+    <p><a href="{% url 'timetable_detail' timetable.id %}">終了する</a></p>
 
   </body>
 </html>

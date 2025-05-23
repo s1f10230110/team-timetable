@@ -7,15 +7,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <meta name="author" content="INIAD">
     <link href="{% static 'timetable/css/index.css' %}" rel="stylesheet">
-    <script type="text/javascript" src="{% static 'timetable/js/index.js' %}"></script>
   </head>
 
   <body>
-    <h1>timetable Application</h1>
-    <p>あいうえお</p>
+    <nav class="navbar fixed-top">
+      <div class="container-fluid justify-content-end">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">メニュー</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active text-white" href="{% url 'index' %}">Top</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'timetable_create' %}">時間割作成</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'timetable_list' %}">時間割一覧</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="headline">
+        <div class="visuallyHidden">時間割アプリ</div>
+          <div class="text mb-3" aria-hidden="true">
+            <span class="char" style="--char-index: 0"> 時 </span>
+            <span class="char" style="--char-index: 1"> 間 </span>
+            <span class="char" style="--char-index: 2"> 割 </span>
+            <span class="char" style="--char-index: 3"> ア </span>
+            <span class="char" style="--char-index: 4"> プ </span>
+            <span class="char" style="--char-index: 5"> リ </span>
+          </div>
+          <div class="link row justify-content-center text-center">
+            <a class="col" href="{% url 'timetable_create' %}">時間割作成</a>
+            <a class="col" href="{% url 'timetable_list' %}">時間割一覧</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
     <a href="{% url 'index' %}">top</a>
     <br>
     <a href="{% url 'test' %}">時間割 デバッグ用</a>
@@ -25,12 +67,11 @@
     <a href="{% url 'filter' %}">時間割フィルタ デバッグ用</a>
     <br>
     <hr>
+    -->
 
-    <h2>↓最低限の機能完成</h2>
-    <a href="{% url 'test3' %}">時間割作成</a>
-    <br>
-    <a href="{% url 'test4' %}">時間割一覧</a>
     
+    
+    <!--
     <p>募：ソースコードの整理(ページ間のリンク、コードの見やすさ、htmlファイル・view.py・urls.pyのわかりやすい名前の変更(これは相互関係があり、直すのが大変なので頑張ってください))、デザイン</p>
     <p>関係あるファイル</p>
     <ul>
@@ -44,7 +85,10 @@
       <li>urls.py</li>
       <li>views.py</li>
     </ul>
-    
+    -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>    
+    <script type="text/javascript" src="{% static 'timetable/js/index.js' %}"></script>
   </body>
 
 
