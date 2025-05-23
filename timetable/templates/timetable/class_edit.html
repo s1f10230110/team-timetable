@@ -6,46 +6,84 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <meta name="author" content="INIAD">
-        <link href="{% static 'timetable/css/index.css' %}" rel="stylesheet">
-        <script type="text/javascript" src="{% static 'timetable/js/index.js' %}"></script>
+        <link href="{% static 'timetable/css/class_edit.css' %}" rel="stylesheet">
     </head>
-  <body>
-    <h1>授業を編集する（{{ entry.subject }}）</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="subject">授業名:</label>
-        <input type="text" id="subject" name="subject" value="{{ entry.subject }}"><br>
+    <body>
+        <nav class="navbar fixed-top">
+            <div class="container-fluid justify-content-end">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
 
-        <label for="weekday">曜日:</label>
-        <select id="weekday" name="weekday">
-            {% for code, label in entry.WEEKDAYS %}
-            <option value="{{ code }}" {% if entry.weekday == code %}selected{% endif %}>{{ label }}</option>
-            {% endfor %}
-        </select><br>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">メニュー</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" href="{% url 'index' %}">Top</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'timetable_create' %}">時間割作成</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'timetable_list' %}">時間割一覧</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-        <label for="period">時限:</label>
-        <select id="period" name="period">
-            {% for code, label in entry.PERIOD_CHOICES %}
-            <option value="{{ code }}" {% if entry.period == code %}selected{% endif %}>{{ label }}</option>
-            {% endfor %}
-        </select><br>
+        <h1 class="text">授業を編集（{{ entry.subject }}）</h1>
+        <div class="text">
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="subject" class="form-label">授業名</label>
+                    <input type="text" id="subject" name="subject" class="form-control" value="{{ entry.subject }}">
+                </div>
 
-        <label for="classroom">教室:</label>
-        <input type="text" id="classroom" name="classroom" value="{{ entry.classroom }}"><br>
+                <div class="mb-3">
+                    <label for="weekday" class="form-label">曜日</label>
+                    <select id="weekday" name="weekday" class="form-select">
+                        {% for code, label in entry.WEEKDAYS %}
+                        <option value="{{ code }}" {% if entry.weekday == code %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-        <label for="teacher">教員:</label>
-        <input type="text" id="teacher" name="teacher" value="{{ entry.teacher }}"><br>
+                <div class="mb-3">
+                    <label for="period" class="form-label">時限</label>
+                    <select id="period" name="period" class="form-select">
+                        {% for code, label in entry.PERIOD_CHOICES %}
+                        <option value="{{ code }}" {% if entry.period == code %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-        <label for="note">メモ:</label>
-        <textarea id="note" name="note">{{ entry.note }}</textarea><br>
+                <div class="mb-3">
+                    <label for="classroom" class="form-label">教室</label>
+                    <input type="text" id="classroom" name="classroom" class="form-control" value="{{ entry.classroom }}">
+                </div>
 
-        <button type="submit">保存</button>
-    </form>
-    
-    <a href="{% url 'timetable_create' %}">時間割を作成</a>
-    <br>
-    <a href="{% url 'index' %}">top</a>
-  </body>
+                <div class="mb-3">
+                    <label for="teacher" class="form-label">教員</label>
+                    <input type="text" id="teacher" name="teacher" class="form-control" value="{{ entry.teacher }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="note" class="form-label">メモ</label>
+                    <textarea id="note" name="note" class="form-control" rows="3">{{ entry.note }}</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">保存</button>
+            </form>
+        </div>
+        
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>  
+    </body>
 </html>
