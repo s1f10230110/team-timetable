@@ -5,12 +5,6 @@ from .models import Timetable, ClassEntry
 def index(request):
     return render(request, 'timetable/index.html')
 
-def test(request):
-    return render(request, 'timetable/test.html')
-
-def test2(request):
-    return render(request, 'timetable/test2.html')
-
 def timetable_create(request):
     if request.method == 'POST':
         # POSTデータを取得
@@ -80,6 +74,3 @@ def delete_class(request, entry_id):
     timetable_id = entry.timetable.id
     entry.delete()
     return redirect('timetable_detail', timetable_id=timetable_id)
-
-def filter(request):
-    return render(request, 'timetable/filter.html')
