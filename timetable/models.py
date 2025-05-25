@@ -16,7 +16,6 @@ class ClassEntry(models.Model):
         ('木', '木曜日'),
         ('金', '金曜日'),
         ('土', '土曜日'),
-        ('日', '日曜日'),
     ]
 
     PERIOD_CHOICES = [
@@ -26,7 +25,6 @@ class ClassEntry(models.Model):
         ('4', '4限'),
         ('5', '5限'),
         ('6', '6限'),
-        ('7', '7限'),
     ]
 
     timetable = models.ForeignKey(Timetable, on_delete=models.CASCADE, related_name='entries', verbose_name="時間割")
