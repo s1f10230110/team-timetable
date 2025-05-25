@@ -25,7 +25,7 @@ function getRandomColor() {
       return colors[Math.floor(Math.random() * colors.length)];
     }
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 20; i++) {
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
 
