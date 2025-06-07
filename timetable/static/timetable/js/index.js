@@ -33,7 +33,8 @@ function getRandomColor() {
       bubble.style.width = `${size}px`;
       bubble.style.height = `${size}px`;
 
-      bubble.style.left = `${Math.random() * 100}vw`;
+      const maxLeftPx = window.innerWidth - size;
+      bubble.style.left = `${Math.random() * maxLeftPx}px`;
       bubble.style.backgroundColor = getRandomColor();
 
       bubble.style.animationDelay = `${Math.random() * 10}s`;
